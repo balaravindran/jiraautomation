@@ -5,14 +5,20 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+// import pageObjects.DashboardPage;
 import userDefinedMethods.JiraUserLibrary;
+import pageObjects.DashboardPage;
+import pageObjects.LogoutPage;
+
 
 
 public class JiraCreateNewIssue extends JiraUserLibrary {
 //  private WebDriver driver;
   private String baseUrl;
   private StringBuffer verificationErrors = new StringBuffer();
-  public static String bugSummary = "Bala Test Bug";
+  public static String bugSummary = "New Bug Create";
+
   
   @Before
   public void setUp() throws Exception {
@@ -32,10 +38,7 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
 //    LoginPage.login_login(driver).click();
 //    DashboardPage.projects(driver).click();
 //    DashboardPage.projects_adt(driver).click();
-    
-    
-
-
+  
     
 //    driver.findElement(By.id("username")).clear();
 //    driver.findElement(By.id("username")).sendKeys("bala.ravindran18@gmail.com");
@@ -49,6 +52,7 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
 //    }
 //
 //    driver.findElement(By.id("browse_link")).click();
+//    DashboardPage.projects(driver).click();
 //    for (int second = 0;; second++) {
 //    	if (second >= 60) fail("timeout");
 //    	try { if (isElementPresent(By.id("admin_main_proj_link_lnk"))) break; } catch (Exception e) {}
@@ -56,43 +60,72 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
 //    }
 
 //    driver.findElement(By.id("admin_main_proj_link_lnk")).click();
+//    DashboardPage.projects_adt(driver).click();
 //    for (int second = 0;; second++) {
 //    	if (second >= 60) fail("timeout");
 //    	try { if (isElementPresent(By.id("create_link"))) break; } catch (Exception e) {}
 //    	Thread.sleep(1000);
 //    }
 
-    driver.findElement(By.id("create_link")).click();
+//    driver.findElement(By.id("create_link")).click();
+//    DashboardPage.create_bug(driver).click();
+//    for (int second = 0;; second++) {
+//    	if (second >= 60) fail("timeout");
+//    	try { if (isElementPresent(By.id("issuetype-field"))) break; } catch (Exception e) {}
+//    	Thread.sleep(1000);
+//    }
+
+//    driver.findElement(By.id("issuetype-field")).click();
+//    driver.findElement(By.id("issuetype-field")).clear();
+//    driver.findElement(By.id("issuetype-field")).sendKeys("Task");
+    DashboardPage.select_issuetype(driver).click();
+    DashboardPage.select_issuetype(driver).clear();
+    DashboardPage.select_issuetype(driver).sendKeys("Bug");
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
-    	try { if (isElementPresent(By.id("issuetype-field"))) break; } catch (Exception e) {}
+    	try { if (isElementPresent(By.id("summary"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
-
-    driver.findElement(By.id("issuetype-field")).click();
-    driver.findElement(By.id("issuetype-field")).clear();
-    driver.findElement(By.id("issuetype-field")).sendKeys("Task");
-    driver.findElement(By.id("summary")).click();
-    driver.findElement(By.id("summary")).clear();
-    driver.findElement(By.id("summary")).sendKeys(bugSummary);
-    driver.findElement(By.id("description")).clear();
-    driver.findElement(By.id("description")).sendKeys("New FFF Version");
-    driver.findElement(By.id("priority-field")).click();
-    driver.findElement(By.id("priority-field")).clear();
-    driver.findElement(By.id("priority-field")).sendKeys("High");
-    driver.findElement(By.id("assign-to-me-trigger")).click();
+    
+    DashboardPage.type_issuesummary(driver).click();
+    DashboardPage.type_issuesummary(driver).clear();
+    DashboardPage.type_issuesummary(driver).sendKeys(bugSummary);
+//    driver.findElement(By.id("summary")).click();
+//    driver.findElement(By.id("summary")).clear();
+//    driver.findElement(By.id("summary")).sendKeys(bugSummary);
+//    driver.findElement(By.id("description")).clear();
+//    driver.findElement(By.id("description")).sendKeys("New FF Version");
+    DashboardPage.type_issuedescription(driver).clear();
+    DashboardPage.type_issuedescription(driver).sendKeys("New FF Version");
+    
+//    driver.findElement(By.id("priority-field")).click();
+//    driver.findElement(By.id("priority-field")).clear();
+//    driver.findElement(By.id("priority-field")).sendKeys("High");
+    DashboardPage.select_priority(driver).click();
+    DashboardPage.select_priority(driver).clear();
+    DashboardPage.select_priority(driver).sendKeys("High");   
+//    driver.findElement(By.id("assign-to-me-trigger")).click();
+    DashboardPage.assign_issuetome(driver).click();
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if (isElementPresent(By.id("create-issue-submit"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
 
-    driver.findElement(By.id("create-issue-submit")).click();
+//    driver.findElement(By.id("create-issue-submit")).click();
+    DashboardPage.submit_newissue(driver).click();
+    
     // ERROR: Caught exception [ERROR: Unsupported command [selectWindow | null | ]]
-    driver.findElement(By.id("header-details-user-fullname")).click();
-    driver.findElement(By.id("log_out")).click();
-    driver.findElement(By.id("logout")).click();
-    driver.findElement(By.cssSelector("button.aui-button.aui-button-link")).click();
+//    driver.findElement(By.id("header-details-user-fullname")).click();
+    LogoutPage.select_user(driver).click();
+    LogoutPage.select_logout(driver).click();
+    LogoutPage.confirm_logout(driver).click();
+    LogoutPage.return_tologin(driver).click();
+   
+//    driver.findElement(By.id("log_out")).click();
+//    driver.findElement(By.id("logout")).click();
+//    driver.findElement(By.cssSelector("button.aui-button.aui-button-link")).click();
+    
   }
 
   @After
