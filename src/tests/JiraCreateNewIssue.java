@@ -20,7 +20,7 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
     baseUrl = "https://automation18.atlassian.net/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
-
+// This test is to create a new bug using Jira
   @Test
   public void testJiraCreateNewIssues() throws Exception {
     driver.get(baseUrl + "login");    
