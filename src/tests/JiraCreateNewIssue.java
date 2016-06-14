@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-// import pageObjects.DashboardPage;
 import userDefinedMethods.JiraUserLibrary;
 import pageObjects.DashboardPage;
 import pageObjects.LogoutPage;

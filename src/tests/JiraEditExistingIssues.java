@@ -6,7 +6,12 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class JiraEditExistingIssues  {
+import pageObjects.LoginPage;
+import pageObjects.DashboardPage;
+import pageObjects.LogoutPage;
+
+
+public class JiraEditExistingIssues {
   private WebDriver driver;
   private String baseUrl;
   private StringBuffer verificationErrors = new StringBuffer();
@@ -19,54 +24,61 @@ public class JiraEditExistingIssues  {
   }
 
   @Test
-  public void testJiraEditExistingIssuesA() throws Exception {
+  public void testJiraEditExistingIssues() throws Exception {
     driver.get(baseUrl + "login");
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("bala.ravindran18@gmail.com");
-    driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("BabaMyLord09");
-    driver.findElement(By.id("login")).click();
+
+    //	Login
+    LoginPage.login_email_Address(driver).sendKeys("bala.ravindran18@gmail.com");
+    LoginPage.login_password(driver).sendKeys("BabaMyLord09");
+    LoginPage.login_login(driver).click();		
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if (isElementPresent(By.id("browse_link"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
 
-    driver.findElement(By.id("browse_link")).click();
+    //	Select Project
+    DashboardPage.projects(driver).click();
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if (isElementPresent(By.id("admin_main_proj_link_lnk"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
 
-    driver.findElement(By.id("admin_main_proj_link_lnk")).click();
-    driver.findElement(By.xpath("//ol/li[9]/a/span")).click();
+    DashboardPage.projects_adt(driver).click();
+    
+//  Issue select a row     
+//    driver.findElement(By.xpath("//ol/li[3]/a/span")).click();
+
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
-    	try { if (isElementPresent(By.cssSelector("span.trigger-label"))) break; } catch (Exception e) {}
+    	try { if (isElementPresent(By.cssSelector("#edit-issue"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
-
-    driver.findElement(By.cssSelector("span.trigger-label")).click();
+    	
+    DashboardPage.select_edit(driver).click();
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if (isElementPresent(By.id("description"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
 
-    driver.findElement(By.id("description")).clear();
-    driver.findElement(By.id("description")).sendKeys("New FFFFF Version updated edited");
-    driver.findElement(By.id("edit-issue-submit")).click();
+    // Update and Submit
+    DashboardPage.type_issuedescription(driver).clear();
+    DashboardPage.type_issuedescription(driver).sendKeys("Updated 1st Row");
+    DashboardPage.select_editupdate(driver).click();
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
     	try { if (isElementPresent(By.id("header-details-user-fullname"))) break; } catch (Exception e) {}
     	Thread.sleep(1000);
     }
 
-    driver.findElement(By.id("header-details-user-fullname")).click();
-    driver.findElement(By.id("log_out")).click();
-    driver.findElement(By.id("logout")).click();
-    driver.findElement(By.cssSelector("button.aui-button.aui-button-link")).click();
+    //	Logout
+    LogoutPage.select_user(driver).click();
+    LogoutPage.select_logout(driver).click();
+    LogoutPage.confirm_logout(driver).click();
+    LogoutPage.return_tologin(driver).click();
+    
   }
 
   @After

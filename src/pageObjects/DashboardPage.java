@@ -59,6 +59,18 @@ public class DashboardPage {
 	return element;
 	
 	}
+	
+	public static WebElement select_edit (WebDriver driver){
+		WebElement element = driver.findElement(By.cssSelector("#edit-issue"));		
+	return element;
+	
+	}
+	
+	public static WebElement select_editupdate (WebDriver driver){
+		WebElement element = driver.findElement(By.id("edit-issue-submit"));		
+	return element;
+	
+	}
 }
 
 
