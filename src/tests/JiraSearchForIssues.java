@@ -59,7 +59,7 @@ public class JiraSearchForIssues {
     // Verify Results
     assertEquals(expectedMessage,actualMessage);
     
-
+    
   }
 
   @After
