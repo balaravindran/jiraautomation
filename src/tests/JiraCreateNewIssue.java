@@ -10,8 +10,6 @@ import userDefinedMethods.JiraUserLibrary;
 import pageObjects.DashboardPage;
 import pageObjects.LogoutPage;
 
-
-
 public class JiraCreateNewIssue extends JiraUserLibrary {
 //  private WebDriver driver;
   private String baseUrl;
@@ -31,52 +29,8 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
     driver.get(baseUrl + "login");    
     jira_login();
     create_new_bug();
-    
-//    LoginPage.login_email_Address(driver).sendKeys("bala.ravindran18@gmail.com");
-//    LoginPage.login_password(driver).sendKeys("BabaMyLord09");
-//    LoginPage.login_login(driver).click();
-//    DashboardPage.projects(driver).click();
-//    DashboardPage.projects_adt(driver).click();
-  
-    
-//    driver.findElement(By.id("username")).clear();
-//    driver.findElement(By.id("username")).sendKeys("bala.ravindran18@gmail.com");
-//    driver.findElement(By.id("password")).clear();
-//    driver.findElement(By.id("password")).sendKeys("BabaMyLord09");
-//    driver.findElement(By.id("login")).click();
-//    for (int second = 0;; second++) {
-//    	if (second >= 60) fail("timeout");
-//    	try { if (isElementPresent(By.id("browse_link"))) break; } catch (Exception e) {}
-//    	Thread.sleep(1000);
-//    }
-//
-//    driver.findElement(By.id("browse_link")).click();
-//    DashboardPage.projects(driver).click();
-//    for (int second = 0;; second++) {
-//    	if (second >= 60) fail("timeout");
-//    	try { if (isElementPresent(By.id("admin_main_proj_link_lnk"))) break; } catch (Exception e) {}
-//    	Thread.sleep(1000);
-//    }
 
-//    driver.findElement(By.id("admin_main_proj_link_lnk")).click();
-//    DashboardPage.projects_adt(driver).click();
-//    for (int second = 0;; second++) {
-//    	if (second >= 60) fail("timeout");
-//    	try { if (isElementPresent(By.id("create_link"))) break; } catch (Exception e) {}
-//    	Thread.sleep(1000);
-//    }
-
-//    driver.findElement(By.id("create_link")).click();
-//    DashboardPage.create_bug(driver).click();
-//    for (int second = 0;; second++) {
-//    	if (second >= 60) fail("timeout");
-//    	try { if (isElementPresent(By.id("issuetype-field"))) break; } catch (Exception e) {}
-//    	Thread.sleep(1000);
-//    }
-
-//    driver.findElement(By.id("issuetype-field")).click();
-//    driver.findElement(By.id("issuetype-field")).clear();
-//    driver.findElement(By.id("issuetype-field")).sendKeys("Task");
+    //	Enter Data and Submit
     DashboardPage.select_issuetype(driver).click();
     DashboardPage.select_issuetype(driver).clear();
     DashboardPage.select_issuetype(driver).sendKeys("Bug");
@@ -87,23 +41,12 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
     }
     
     DashboardPage.type_issuesummary(driver).click();
-    DashboardPage.type_issuesummary(driver).clear();
     DashboardPage.type_issuesummary(driver).sendKeys(bugSummary);
-//    driver.findElement(By.id("summary")).click();
-//    driver.findElement(By.id("summary")).clear();
-//    driver.findElement(By.id("summary")).sendKeys(bugSummary);
-//    driver.findElement(By.id("description")).clear();
-//    driver.findElement(By.id("description")).sendKeys("New FF Version");
     DashboardPage.type_issuedescription(driver).clear();
     DashboardPage.type_issuedescription(driver).sendKeys("New FF Version");
-    
-//    driver.findElement(By.id("priority-field")).click();
-//    driver.findElement(By.id("priority-field")).clear();
-//    driver.findElement(By.id("priority-field")).sendKeys("High");
     DashboardPage.select_priority(driver).click();
     DashboardPage.select_priority(driver).clear();
     DashboardPage.select_priority(driver).sendKeys("High");   
-//    driver.findElement(By.id("assign-to-me-trigger")).click();
     DashboardPage.assign_issuetome(driver).click();
     for (int second = 0;; second++) {
     	if (second >= 60) fail("timeout");
@@ -111,20 +54,15 @@ public class JiraCreateNewIssue extends JiraUserLibrary {
     	Thread.sleep(1000);
     }
 
-//    driver.findElement(By.id("create-issue-submit")).click();
     DashboardPage.submit_newissue(driver).click();
     
-    // ERROR: Caught exception [ERROR: Unsupported command [selectWindow | null | ]]
-//    driver.findElement(By.id("header-details-user-fullname")).click();
+    //	Logout
     LogoutPage.select_user(driver).click();
     LogoutPage.select_logout(driver).click();
     LogoutPage.confirm_logout(driver).click();
     LogoutPage.return_tologin(driver).click();
    
-//    driver.findElement(By.id("log_out")).click();
-//    driver.findElement(By.id("logout")).click();
-//    driver.findElement(By.cssSelector("button.aui-button.aui-button-link")).click();
-    
+ 
   }
 
   @After
